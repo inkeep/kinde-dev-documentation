@@ -102,3 +102,25 @@ Other situations you can cater for include:
 - [Adding MFA for an organization's users](/authenticate/multi-factor-auth/mfa-per-org/)
 - Adding other [enterprise connections](/authenticate/enterprise-connections/about-enterprise-connections/) (e.g. [Google Workspace](/authenticate/enterprise-connections/custom-saml-google-workspace/) or [Microsoft Entra ID](/authenticate/enterprise-connections/azure/))
 - [Auto-assigning user roles](/manage-users/roles-and-permissions/default-user-roles/)
+
+## Enable both SSO and email authentication for a customer
+
+If you need to enable both SSO and email authentication for a single customer organization, you can configure both methods to work together. This allows some users to authenticate via SSO while others use email-based authentication.
+
+### Steps to enable both authentication methods
+
+1. **Set up the enterprise connection for SSO**
+   - Add an enterprise connection (such as SAML or OIDC) for your customer's identity provider.
+   - Configure the connection with the customer's domain information using home realm discovery.
+   - In the organization settings, enable the relevant enterprise connection.
+   - In the organization's policies, add the customer's domain(s) to the **Allowed domains** field and enable **Auto-add users from allowed domains** to activate just-in-time (JIT) provisioning for SSO users.
+
+2. **Enable email authentication for the organization**
+   - In your Kinde application's authentication settings, ensure that **Email + code** (passwordless) or **Email + password** is enabled as a sign-in method.
+   - Make sure both the enterprise connection (SSO) and email authentication methods are toggled on in your application.
+
+3. **Configure user routing**
+   - When users enter their email on the sign-in screen, Kinde will automatically route them based on their email domain:
+     - If their domain matches the SSO configuration, they'll be routed through the enterprise connection.
+     - If their domain doesn't match, they'll be able to use email authentication.
+   - This creates a unified sign-in experience where both authentication methods work seamlessly together.
