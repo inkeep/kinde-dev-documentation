@@ -93,6 +93,20 @@ To achieve the above scenario, all the supported sign-in methods need to be swit
 
 ![Auth options to switch on in Kinde](https://imagedelivery.net/skPPZTHzSlcslvHjesZQcQ/cf3a393d-b977-4de3-2bd1-dae72ec93f00/public)
 
+
+## Enable both SSO and email authentication for a customer
+
+If you need to enable both SSO (such as SAML or social sign-in) and email authentication for a single customer organization, you can configure multiple authentication methods simultaneously.
+
+1. In Kinde, go to **Settings > Authentication** and ensure both authentication methods are enabled:
+   - Enable your desired SSO connection (e.g., SAML, Microsoft Entra ID, Google)
+   - Enable email authentication (password or passwordless)
+2. Navigate to the relevant organization where you want both methods available.
+3. Go to the organization's **Authentication** settings.
+4. Switch on both the SSO connection and the email authentication method for that organization.
+5. Save your changes.
+
+With both methods enabled, users in that organization will see options for both SSO and email authentication on the sign-in screen, allowing them to choose their preferred method.
 ## Optimize your auth flow
 
 This unified model of authentication can be extended to 10’s or 100’s of organizations, all while maintaining the same sign in screen.
