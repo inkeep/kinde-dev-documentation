@@ -23,6 +23,43 @@ At Kinde, each user can only have one enterprise identity provider (IdP) connect
 
 We get asked about this regularly, so this document explains our reasoning from a security and architectural perspective.
 
+## Can I enable both SSO and email authentication?
+
+A common question is whether you can enable both SSO (enterprise connections) and email authentication for the same user. The answer depends on how you structure your authentication:
+
+### Users with enterprise identities
+
+Users who authenticate via an enterprise connection (SAML, Microsoft Entra ID, etc.) **cannot also use email authentication**. This is because:
+
+- Users with enterprise identities in Kinde can only have an enterprise identity
+- Identity information is sourced from and managed by the identity provider (IdP), not Kinde
+- This ensures security, prevents identity conflicts, and maintains clear accountability
+
+### Users with email identities
+
+Users who authenticate via email (with password or passwordless) can have multiple non-enterprise identity types:
+
+- Email identity (password or passwordless)
+- Social identities (Google, Apple, GitHub, etc.)
+- Phone authentication
+
+These identity types can be combined for the same user, as long as they share a verified email address.
+
+### Setting up both methods for different users
+
+If you need to support both SSO and email authentication in your application, you can enable both methods at the environment level:
+
+1. **Enable email authentication**: Go to **Settings > Environment > Authentication** and configure the **Email** tile in either the **Passwordless** or **Password** section for your applications.
+2. **Enable enterprise connections**: Set up your enterprise connection (SAML, Microsoft Entra ID, etc.) by following the relevant guide.
+
+With both methods enabled, different users in your application can authenticate using their preferred method:
+
+- Enterprise users will sign in via SSO through their organization's identity provider
+- Regular users will sign in via email (with password or one-time code)
+
+See [Select authentication options](/authenticate/authentication-methods/set-up-user-authentication/) for step-by-step instructions.
+
+
 ## What is an enterprise connection?
 
 An enterprise connection allows users to sign in to your product using their organization’s identity provider — such as Okta, Azure AD, or Google Workspace. This enables Single Sign-On (SSO), centralized user management, and improved security for enterprise customers.
